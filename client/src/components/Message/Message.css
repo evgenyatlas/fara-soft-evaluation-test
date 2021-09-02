@@ -1,0 +1,23 @@
+.Message {
+ margin-top: 10px;
+}
+
+.Message__Avatar {
+    float: left;
+    margin-right: 5px;
+}
+
+.Message__Content {
+    background: white;
+    border-radius: 5px;
+    float: left;
+    min-height: var(--default-size-controls-controls);
+    padding: 7px;
+}
+
+.Message__Time {
+    margin-top: 4px;
+    font-size: 13px;
+    color: #6f6f6f;
+    text-align: right;
+}
