@@ -1,0 +1,31 @@
+.Input {
+    min-height: var(--default-height-controls);
+    line-height: 42px;
+    background: white;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 0 10px;
+}
+
+.Input > * {
+    font-size: 16px;
+}
+
+.Input > [contenteditable="true"] {
+    min-width: 100px;
+    position: relative;
+}
+
+.Input > [contenteditable="true"][placeholder]:empty::before {
+    content: attr(placeholder);
+    color: #555; 
+    position: absolute;
+    cursor: text;
+}
+
+
+.Input > [contenteditable="true"][placeholder]:empty:focus::before {
+    content: "";
+    position: absolute;
+
+}
