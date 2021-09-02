@@ -1,0 +1,51 @@
+.ChatInfo {
+    width: 100%;
+    height: 50px;
+    background: white;
+    box-shadow: 0px 1px 5px -1px rgba(0,0,0,.21);
+    position: absolute;
+}
+
+.ChatInfo > .container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.ChatInfo__Info {
+    margin-right: 10px;
+    max-width: 120px;
+    overflow: hidden;
+}
+
+.ChatInfo__InfoName {
+    color: black;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.ChatInfo__InfoNumber {
+    font-size: 12px;
+}
+
+.ChatInfo__ListUsers {
+    height: 100%;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.ChatInfo__ListUsers > div {
+    margin: 0px 5px;
+    flex: 0 0 auto;
+}
+
+.ChatInfo__Share {
+    position: absolute;
+    right: 0px;
+}
