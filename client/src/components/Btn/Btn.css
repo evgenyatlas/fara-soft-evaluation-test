@@ -1,0 +1,39 @@
+.Btn {
+    height: var(--default-height-controls);
+    min-width: var(--default-height-controls);
+    line-height: var(--default-height-controls);
+    background: white;
+    display: inline-block;
+    padding: 0 5px;
+    transition: transform 0.2s;
+    transform: scale(1);
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.Btn_shadow {
+    box-shadow: 0px 1px 8px 1px rgb(0, 0, 0, 0.05);
+}
+
+.Btn_color-blue {
+    background: rgba(51, 144, 236);
+    color: white;
+}
+
+.Btn_center-align {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Btn:hover, .Btn > :hover {
+    cursor: pointer;
+}
+
+.Btn:active {
+    transform: scale(1.08);
+}
+
+.Btn_round {
+    border-radius: 50%;
+}
