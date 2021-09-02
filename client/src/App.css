@@ -1,0 +1,9 @@
+:root {
+  --default-height-controls: 42px;
+}
+
+App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
