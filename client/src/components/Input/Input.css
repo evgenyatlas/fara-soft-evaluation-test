@@ -1,5 +1,5 @@
 .Input {
-    min-height: var(--default-height-controls);
+    min-height: var(--default-size-controls-controls);
     line-height: 42px;
     background: white;
     display: inline-block;

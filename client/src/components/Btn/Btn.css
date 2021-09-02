@@ -1,7 +1,7 @@
 .Btn {
-    height: var(--default-height-controls);
-    min-width: var(--default-height-controls);
-    line-height: var(--default-height-controls);
+    height: var(--default-size-controls-controls);
+    min-width: var(--default-size-controls-controls);
+    line-height: var(--default-size-controls-controls);
     background: white;
     display: inline-block;
     padding: 0 5px;

@@ -1,0 +1,9 @@
+.User {
+    width: var(--default-size-controls);
+    height: var(--default-size-controls);
+    line-height: var(--default-size-controls);
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+}
