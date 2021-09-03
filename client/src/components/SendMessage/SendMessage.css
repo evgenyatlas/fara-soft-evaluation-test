@@ -1,0 +1,14 @@
+.SendMessage {
+    padding-right: calc(var(--default-size-controls) + 5px);
+    position: relative;
+}
+
+.SendMessage__Input {
+    width: 100%;
+}
+
+.SendMessage__Send {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
