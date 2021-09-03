@@ -1,5 +1,7 @@
 const Chat = require('./features/chat/chat')
 const User = require('./features/user/user')
+const { uid } = require('./lib/uid')
+
 
 class App {
     #io
@@ -13,12 +15,17 @@ class App {
         })
     }
     joinChat(socket, { userName, chatId }) {
-        if (!this.#chats.has(chatId)) this.#chats.set(chatId, new Chat())
+        //If ChatId is not passed, then we generate
+        chatId = chatId || uid()
+        //If the chat does not exist, then create a new one
+        if (!this.#chats.has(chatId))
+            this.#chats.set(chatId, new Chat(id))
+
         const chat = this.#chats.get(chatId)
 
         const user = new User(userName, socket)
 
-        chat.addUser(user)
+        chat.join(user)
     }
 }
 

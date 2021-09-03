@@ -10,30 +10,26 @@ import { url2chatId } from "./lib/url2chatId"
  * 
  */
 class Chat {
-    id = new ValueStore('')
+    id = new ValueStore(url2chatId(history.location.pathname))
     logged = new ValueStore(false)
     messages = new ValueStore([])
+    users = new ValueStore({})
     connect
-    constructor() {
-        this.#installId()
-    }
     init(connect) {
         this.connect = connect
     }
-    //it seems bad #1
-    #installId = () => {
-        //get chat id from url
-        let id = url2chatId(history.location.pathname);
-        //If the chat is new, then we generate ID and go to url
-        if (!id) {
-            id = uid();
-            history.push(id);
-        }
-        this.id.set(id);
-    }
+    /**
+     * chat join method
+     * @param {string} userName
+     */
     async join(userName) {
         try {
-            const { messages, users } = await this.connect.req('join', { userName, chatId: this.id.get() })
+            const { messages, users, chatId } = await this.connect.req('join', { userName, chatId: this.id.get() })
+            //If the chat is new, then go there
+            if (chatId !== this.id) {
+                this.id.set(chatId)
+                history.push(chatId)
+            }
             this.logged.set(true)
         } catch (error) {
             showError(error)
