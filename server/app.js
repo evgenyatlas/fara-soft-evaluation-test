@@ -11,10 +11,17 @@ class App {
     }
     init() {
         this.#io.on('connection', async (socket) => {
-            socket.on('join', this.joinChat.bind(this, socket));
+            //I am using bind to bind context and currying
+            socket.on('join', this.#joinChat.bind(this, socket));
         })
     }
-    joinChat(socket, { userName, chatId }) {
+    /**
+     * 
+     * @param {socket} socket 
+     * @param {string} data.userName 
+     * @param {(string || null)} data.chatId 
+     */
+    #joinChat(socket, { userName, chatId }) {
         //If ChatId is not passed, then we generate
         chatId = chatId || uid()
         //If the chat does not exist, then create new 

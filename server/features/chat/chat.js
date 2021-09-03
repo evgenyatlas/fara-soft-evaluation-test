@@ -1,4 +1,5 @@
-const { forEachObj } = require("../../lib/forEachObj")
+const { forEachObj } = require("../../lib/forEachObj");
+const Message = require("../message/message");
 
 class Chat {
     id
@@ -27,8 +28,9 @@ class Chat {
                 }
             });
         }
+        //save user to dictionary
         this.#users[user.name] = user;
-        //sending data to the user
+        //sending initial data to the user
         user.emit('join', { messages: this.#messages, users: this.#users, chatId: this.id });
         //notify other users about a new user
         this.#broadcast(user, 'userJoin', user);
@@ -38,7 +40,10 @@ class Chat {
     #subsUserEvents(user) {
         //i use bind not only for context binding, but also for currying
         user.on('disconnect', this.#leave.bind(this, user));
+        user.on('userMessage', this.#message.bind(this, user));
     }
+
+    /*** User action handlers ***/
     /**
      * User leave
      * @param {User} user 
@@ -49,18 +54,39 @@ class Chat {
         //notify other users about a new user
         this.#broadcast(user, 'userLeave', user);
     }
+    /**
+     * User message
+     * @param {User} user 
+     * @param {string} message 
+     */
+    #message(user, { text }) {
+        const message = new Message(user, text)
+        this.#messages.push(message)
+        this.#emitAll('userMessage', message)
+    }
+    /********/
+
     //I dont know about native broadcast and rooms :)
     /**
      * emit for all users
+     * @param {User} options.except
      * @param {string} options.event
      * @param {any} options.data
-     * @param {filter} options.filter
      */
     #broadcast(except, event, data) {
+        this.#emitAll(event, data, (user) => user !== except)
+    }
+    /**
+     * Emit for all users
+     * @param {string} event 
+     * @param {any} data 
+     * @param {Function} filter 
+     */
+    #emitAll(event, data, filter = Boolean) {
         forEachObj(
             this.#users,
-            (userName, user) => except !== user && user.emit(event, data)
-        );
+            (userName, user) => filter(user) && user.emit(event, data)
+        )
     }
 }
 

@@ -1,6 +1,7 @@
 import ValueStore from "../../lib/effector/valueStore";
 import history from "../../lib/history";
 import { showError } from "../../lib/showError";
+import Messages from "../messages/messages";
 import Users from "../users/users";
 import { url2chatId } from "./lib/url2chatId";
 
@@ -11,7 +12,7 @@ import { url2chatId } from "./lib/url2chatId";
 class Chat {
     id = new ValueStore(url2chatId(history.location.pathname))
     joined = new ValueStore(false)
-    messages = new ValueStore([])
+    messages = new Messages([])
     users = new Users({})
     #connect
     /**
@@ -48,11 +49,19 @@ class Chat {
         }
     }
     /**
+     * send message
+     * @param {string} text
+     */
+    async sendMessage(text) {
+        this.#connect.emit('userMessage', { text });
+    }
+    /**
      * Subscribing to user events
      */
     #subsEvents = () => {
         this.#connect.on('userJoin', this.#userJoin);
         this.#connect.on('userLeave', this.#userLeave);
+        this.#connect.on('userMessage', this.#message);
     }
     /**
      * handle joined users
@@ -67,6 +76,9 @@ class Chat {
      */
     #userLeave = (user) => {
         this.users.remove(user);
+    }
+    #message = (message) => {
+        this.messages.add(message)
     }
 }
 

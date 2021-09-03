@@ -14,7 +14,6 @@ export default class Connect {
         return new Promise((res, rej) => {
             this.#socket = io(this.#serverUrl);
             this.#socket.once('connect', function () {
-                console.log('connect');
                 res();
             });
             this.#socket.on('connect_error', e => {

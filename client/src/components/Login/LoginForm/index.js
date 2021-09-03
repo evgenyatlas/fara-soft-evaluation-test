@@ -6,7 +6,7 @@ import chat from '../../../modules/chat/chat';
 
 
 /**
- * LoginForm component
+ * LoginForm component (Auth)
  */
 export function LoginForm() {
     const {

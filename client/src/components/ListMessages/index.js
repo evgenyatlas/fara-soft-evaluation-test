@@ -1,13 +1,16 @@
+import { useStore } from 'effector-react';
 import React, { useState } from 'react';
+import chat from '../../modules/chat/chat';
 import { Message } from '../Message';
 
 import './ListMessages.css';
 
 export function ListMessages() {
-    const [list, setList] = useState([])
+    const messages = useStore(chat.messages.$store);
     return (
         <div className="ListMessages">
-            {list.reverse().map((i) => <Message user={{ nickname: "Evgeny", color: "red" }} text={i + "DWDWD wDWdwdw dwdwdwd"} time={new Date() - 1000 * 60} />)}
+            {messages.map((message) => <Message key={message.user.name + message.time} {...message} />)}
         </div>
     );
 }
+

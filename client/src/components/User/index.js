@@ -7,19 +7,20 @@ import './User.css';
 
 /**
 * Component for displaying a avatar from first two letters
-* @param {string} props.nickname 
-* @param {string} props.nickname 
+* @param {string} props.className 
+* @param {string} props.name 
 * @param {boolean} props.color 
 */
-export function User({ className, nickname, color }) {
+export function User({ className, name, color }) {
     return (
         <div className={cn("User", className)} style={{ backgroundColor: color }}>
-            {nickname.slice(0, 2)}
+            {name.slice(0, 2)}
         </div>
     );
 }
 
 User.propTypes = {
-    nickname: PropTypes.string.isRequired,
+    className: PropTypes.string,
+    name: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired
 };
