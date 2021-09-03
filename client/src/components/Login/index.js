@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { LoginForm } from './LoginForm';
 import { useStore } from 'effector-react';
-import login from '../../features/user/user';
+import user from '../../features/user/user';
 
 import './Login.css';
 
@@ -9,7 +9,7 @@ import './Login.css';
  * Login component
  */
 export function Login() {
-    const logged = useStore(login.name.$store)
+    const logged = useStore(user.logged.$store)
     return (
         logged ?
             null
