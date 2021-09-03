@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
 import './Input.css'
@@ -13,13 +13,13 @@ import './Input.css'
 * @param {text} props.type 
 * @param {text} props.placeholder 
 */
-export function Input({ className, ...props }) {
+export const Input = forwardRef(function Input({ className, ...props }, ref) {
     return (
         <div className={cn("Input", className)}>
-            <input {...props} />
+            <input {...props} ref={ref} />
         </div>
     )
-}
+})
 
 
 Input.propTypes = {
