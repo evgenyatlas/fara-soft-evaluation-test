@@ -14,6 +14,6 @@ export function obj2list(obj, map) {
             (key, value) => list.push(map(value))
             :
             (key, value) => list.push(value)
-    )
-    return list
+    );
+    return list;
 }

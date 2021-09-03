@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import PropTypes from "prop-types";
 import { User } from '../User';
 import { timePassed } from '../../lib/timePassed';
@@ -21,7 +21,7 @@ export function Message({ text, user, time, float = 'left' }) {
                 <div className="Message__Time">{timePassed(time)}</div>
             </div>
         </div>
-    )
+    );
 }
 
 Message.propTypes = {
@@ -32,4 +32,4 @@ Message.propTypes = {
     }),
     time: PropTypes.number.isRequired,
     float: PropTypes.oneOf(['right', 'left'])
-}
+};

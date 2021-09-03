@@ -1,4 +1,4 @@
-import { declOfNum } from "./declOfNum"
+import { declOfNum } from "./declOfNum";
 
 /**
  * Displays the date in format: 5 минут назад | 1 час назад 
@@ -7,15 +7,15 @@ import { declOfNum } from "./declOfNum"
  */
 export function timePassed(time) {
 
-    const now = Date.now()
-    const diff = now - time
+    const now = Date.now();
+    const diff = now - time;
     if (diff < 1000 * 60 * 1.5) {
-        return 'только что'
+        return 'только что';
     } else if (diff > 1000 * 5 && diff < 1000 * 60 * 60) {
-        const t = Math.round(diff / 1000 / 60)
-        return t + ' ' + declOfNum(t, ['минуту', 'минуты', 'минут']) + ' назад'
+        const t = Math.round(diff / 1000 / 60);
+        return t + ' ' + declOfNum(t, ['минуту', 'минуты', 'минут']) + ' назад';
     }
 
-    const t = Math.round(diff / 1000 / 60 / 60)
-    return t + ' ' + declOfNum(t, ['час', 'часа', 'часов']) + ' назад'
+    const t = Math.round(diff / 1000 / 60 / 60);
+    return t + ' ' + declOfNum(t, ['час', 'часа', 'часов']) + ' назад';
 }

@@ -35,7 +35,7 @@ export function Btn({ className, centerAlign, shadow = true, children, onClick, 
         >
             {children}
         </button>
-    )
+    );
 }
 
 Btn.propTypes = {
@@ -47,4 +47,4 @@ Btn.propTypes = {
     onClick: PropTypes.func,
     type: PropTypes.string,
     shadow: PropTypes.bool
-}
+};

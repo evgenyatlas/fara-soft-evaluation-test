@@ -1,11 +1,10 @@
 import React from 'react';
 import { ChatInfo } from './components/ChatInfo';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { Chat } from './components/Chat';
 import { Login } from './components/Login';
 import Connect from './lib/io/connect';
-import chat from './features/chat/chat';
-import user from './features/user/user';
+import chat from './modules/chat/chat';
 import config from './config';
 
 import './App.css';
@@ -17,13 +16,11 @@ export default class App {
         //Connect to the server
         this.#connect = new Connect(config('SERVER_URL'));
         await this.#connect.init();
-
-        chat.init(this.#connect)
-
-        this.#connect.on('error', this.handleErrors)
+        chat.init(this.#connect);
+        this.#connect.on('error', this.handleErrors);
     }
     handleErrors(error) {
-        console.error(error)
+        console.error(error);
     }
     Component() {
         return (
@@ -33,6 +30,6 @@ export default class App {
                 <Login />
                 <ToastContainer />
             </div>
-        )
+        );
     }
 }

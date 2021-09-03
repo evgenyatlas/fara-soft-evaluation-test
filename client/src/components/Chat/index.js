@@ -1,5 +1,4 @@
-import React from 'react'
-import PropTypes from "prop-types";
+import React from 'react';
 import { SendMessage } from '../SendMessage';
 import { ListMessages } from '../ListMessages';
 
@@ -14,9 +13,5 @@ export function Chat() {
             <ListMessages />
             <SendMessage className="Chat__Send" />
         </div>
-    )
-}
-
-Chat.propTypes = {
-
+    );
 }

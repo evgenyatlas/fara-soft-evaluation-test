@@ -1,7 +1,7 @@
-import React, { forwardRef } from 'react'
-import PropTypes from 'prop-types'
-import cn from 'classnames'
-import './Input.css'
+import React, { forwardRef } from 'react';
+import PropTypes from 'prop-types';
+import cn from 'classnames';
+import './Input.css';
 
 /**
 * Input component
@@ -18,8 +18,8 @@ export const Input = forwardRef(function Input({ className, ...props }, ref) {
         <div className={cn("Input", className)}>
             <input {...props} ref={ref} />
         </div>
-    )
-})
+    );
+});
 
 
 Input.propTypes = {
@@ -30,4 +30,4 @@ Input.propTypes = {
     required: PropTypes.bool,
     type: PropTypes.string,
     placeholder: PropTypes.string,
-}
+};

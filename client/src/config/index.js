@@ -1,5 +1,6 @@
 import config from './default.json';
 
-export default (key) => {
-    return key ? config[key] : config
+
+export default function getConfig(key) {
+    return key ? config[key] : config;
 }

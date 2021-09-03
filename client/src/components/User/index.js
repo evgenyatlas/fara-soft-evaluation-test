@@ -16,10 +16,10 @@ export function User({ className, nickname, color }) {
         <div className={cn("User", className)} style={{ backgroundColor: color }}>
             {nickname.slice(0, 2)}
         </div>
-    )
+    );
 }
 
 User.propTypes = {
     nickname: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired
-}
+};

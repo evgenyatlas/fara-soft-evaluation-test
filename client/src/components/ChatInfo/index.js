@@ -35,5 +35,5 @@ export function ChatInfo() {
                 <ShareLinkBtn className="ChatInfo__Share" />
             </div>
         </div>
-    )
+    );
 }

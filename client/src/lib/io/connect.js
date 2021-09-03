@@ -14,13 +14,13 @@ export default class Connect {
         return new Promise((res, rej) => {
             this.#socket = io(this.#serverUrl);
             this.#socket.once('connect', function () {
+                console.log('connect');
                 res();
             });
             this.#socket.on('connect_error', e => {
-                console.log(e)
                 rej(e);
             });
-        })
+        });
     }
     /**
     * Promise over once
@@ -31,13 +31,13 @@ export default class Connect {
     async take(event) {
         return new Promise((res, rej) => {
             this.#socket.once(event, (data) => {
-                if (data && data.error) return rej(data.error)
-                res(data)
+                if (data && data.error) return rej(data.error);
+                res(data);
             });
             this.#socket.once('disconnect', () => {
                 rej(new Error({ code: 500, message: 'Ошибка подключения' }));
-            })
-        })
+            });
+        });
     }
     /**
      * request -> response (request and wait for a response)
@@ -51,11 +51,11 @@ export default class Connect {
             this.take(event)
                 .then(res)
                 .catch(rej);
-        })
+        });
     }
     close() {
-        this.#socket.removeAllListeners()
-        this.#socket.close()
+        this.#socket.removeAllListeners();
+        this.#socket.close();
     }
     on(event, fn) {
         this.#socket.on(event, fn);
