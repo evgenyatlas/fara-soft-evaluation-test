@@ -1,7 +1,7 @@
 import { forEachObj } from "./forEachObj";
 
 /**
- * transforming object to list
+ * convert object to list
  * @param {Object} obj 
  * @param {(key, value) => item} map - changes to each element
  * @returns {Array} list

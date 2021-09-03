@@ -11,15 +11,15 @@ class App {
     }
     init() {
         this.#io.on('connection', async (socket) => {
-            socket.on('join', this.joinChat.bind(this, socket))
+            socket.on('join', this.joinChat.bind(this, socket));
         })
     }
     joinChat(socket, { userName, chatId }) {
         //If ChatId is not passed, then we generate
         chatId = chatId || uid()
-        //If the chat does not exist, then create a new one
+        //If the chat does not exist, then create new 
         if (!this.#chats.has(chatId))
-            this.#chats.set(chatId, new Chat(id))
+            this.#chats.set(chatId, new Chat(chatId))
 
         const chat = this.#chats.get(chatId)
 
