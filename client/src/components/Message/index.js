@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from "prop-types";
-import { NickAvatar } from '../NickAvatar';
+import { User } from '../User';
 import { timePassed } from '../../lib/timePassed';
 
 import './Message.css';
@@ -15,7 +15,7 @@ import './Message.css';
 export function Message({ text, user, time, float = 'left' }) {
     return (
         <div className="Message">
-            <NickAvatar className="Message__Avatar" {...user} />
+            <User className="Message__Avatar" {...user} />
             <div className="Message__Content">
                 {text}
                 <div className="Message__Time">{timePassed(time)}</div>

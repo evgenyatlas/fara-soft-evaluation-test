@@ -1,0 +1,6 @@
+.ListMessages {
+    display: flex;
+    flex-direction: column-reverse;
+    height: 100%;
+    overflow: scroll;
+}

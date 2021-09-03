@@ -2,7 +2,7 @@ import React from 'react';
 import { Btn } from "../Btn";
 import PropTypes from 'prop-types';
 
-const copyCurrLink = () => navigator.clipboard.writeText(location.href)
+const copyCurrLink = () => window.navigator.clipboard.writeText(window.location.href)
 /**
  * ShareBtn component
  * @param {Function} onClick 

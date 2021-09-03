@@ -3,6 +3,8 @@ import { Input } from '../../Input';
 import { SendBtn } from '../../SendBtn';
 import { useForm } from 'react-hook-form';
 import login from '../../../features/user/user';
+import chat from '../../../features/chat/chat';
+
 
 /**
  * LoginForm component
@@ -13,7 +15,7 @@ export function LoginForm() {
         handleSubmit,
         reset
     } = useForm();
-    const onSubmit = ({ loginName }) => login.name.set(loginName);
+    const onSubmit = ({ loginName }) => chat.join(loginName);
     return (
         <form className="flex-align-center" onSubmit={handleSubmit(onSubmit)}>
             <Input {...register('loginName')} placeholder="Пример: Василий" required />

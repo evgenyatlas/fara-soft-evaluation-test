@@ -1,4 +1,6 @@
+import { createEvent, createStore } from "effector";
 import ValueStore from "../../lib/effector/valueStore";
+import { setPayload } from "../../lib/effector/setPayload";
 import { waitEvent } from "../../lib/effector/waitValue";
 
 /**
@@ -7,17 +9,6 @@ import { waitEvent } from "../../lib/effector/waitValue";
  */
 class User {
     name = new ValueStore('');
-    logged = new ValueStore(false);
-    /**
-     * user authorization
-     * @param {Connect} connect 
-     */
-    async auth(connect) {
-        //gets a name or waits until name is entered
-        const name = this.name.get() || await waitEvent(this.name.set);
-        await connect.req('login', name);
-        this.logged.set(true);
-    }
 }
 
 export default new User();

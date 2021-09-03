@@ -1,4 +1,6 @@
+import { useStore } from 'effector-react';
 import React from 'react';
+import chat from '../../features/chat/chat';
 import { declOfNum } from '../../lib/declOfNum';
 import { User } from '../User';
 import { ShareLinkBtn } from '../ShareLinkBtn';
@@ -6,7 +8,7 @@ import { ShareLinkBtn } from '../ShareLinkBtn';
 import './ChatInfo.css';
 
 export function ChatInfo({ }) {
-    const id = ''
+    const id = useStore(chat.id.$store)
     const users = [1, 2];
     return (
         <div className="ChatInfo">

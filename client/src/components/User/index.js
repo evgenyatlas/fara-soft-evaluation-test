@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 
 import './User.css';
 
+
 /**
-* Component for displaying a user from first two letters
+* Component for displaying a avatar from first two letters
 * @param {string} props.nickname 
 * @param {string} props.nickname 
 * @param {boolean} props.color 

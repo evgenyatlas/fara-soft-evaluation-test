@@ -17,9 +17,50 @@ export default class Connect {
                 res();
             });
             this.#socket.on('connect_error', e => {
+                console.log(e)
                 rej(e);
             });
         })
     }
-
+    /**
+    * Promise over once
+    * @param {object} socket 
+    * @param {string} event 
+    * @returns {Promise} Promise
+    */
+    async take(event) {
+        return new Promise((res, rej) => {
+            this.#socket.once(event, (data) => {
+                if (data && data.error) return rej(data.error)
+                res(data)
+            });
+            this.#socket.once('disconnect', () => {
+                rej(new Error({ code: 500, message: 'Ошибка подключения' }));
+            })
+        })
+    }
+    /**
+     * request -> response (request and wait for a response)
+     * @param {string} event 
+     * @param {any} data 
+     * @returns {Promise} Promise
+     */
+    async req(event, data) {
+        return new Promise((res, rej) => {
+            this.#socket.emit(event, data);
+            this.take(event)
+                .then(res)
+                .catch(rej);
+        })
+    }
+    close() {
+        this.#socket.removeAllListeners()
+        this.#socket.close()
+    }
+    on(event, fn) {
+        this.#socket.on(event, fn);
+    }
+    emit(event, data) {
+        this.#socket.emit(event, data);
+    }
 }
