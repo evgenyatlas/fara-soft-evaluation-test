@@ -15,9 +15,8 @@ import './Input.css';
 */
 export const Input = forwardRef(function Input({ className, ...props }, ref) {
     return (
-        <div className={cn("Input", className)}>
-            <input {...props} ref={ref} />
-        </div>
+        <input className={cn("Input", className)} {...props} ref={ref} >
+        </input>
     );
 });
 
