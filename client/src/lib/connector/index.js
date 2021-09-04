@@ -16,9 +16,9 @@ export default class Connector {
      */
     connect(onSuccess, onError) {
         this.#socket = io(this.#serverUrl);
-        //I am using bind for currying
         this.#socket.on('connect', onSuccess);
         this.#socket.on('connect_error', onError);
+        this.#socket.on('disconnect', onError);
     }
     /**
     * request -> response (request and wait for a response)
@@ -47,7 +47,7 @@ export default class Connector {
                 res(data);
             });
             this.#socket.once('disconnect', () => {
-                rej(new Error({ code: 500, message: 'Ошибка подключения' }));
+                rej(new Error('Ошибка подключения'));
             });
         });
     }
