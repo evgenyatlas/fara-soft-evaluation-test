@@ -19,9 +19,9 @@ export default class App {
         chat.init(connector);
         //Connect to server
         connector.connect(
-            //callback on success
+            //start the chat if connection is successful
             chat.start,
-            //callback on error
+            //stop chat if connection fails
             () => {
                 showError(new Error('Ошибка подключения к серверу'), 1000);
                 chat.stop();

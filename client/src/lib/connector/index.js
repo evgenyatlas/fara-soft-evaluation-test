@@ -12,7 +12,7 @@ export default class Connector {
     /**
      * connect to the server
      * @param {Function} onSuccess - will be called when connecting
-     * @returns {Function} onError - will be called when error
+     * @param {Function} onError - will be called when error
      */
     connect(onSuccess, onError) {
         this.#socket = io(this.#serverUrl);
@@ -21,7 +21,7 @@ export default class Connector {
         this.#socket.on('disconnect', onError);
     }
     /**
-    * request -> response (request and wait for a response)
+    * request/emit -> response (request/emit and wait for a response)
     * @param {string} event 
     * @param {any} data 
     * @returns {Promise} Promise
@@ -46,11 +46,14 @@ export default class Connector {
                 if (data && data.error) return rej(data.error);
                 res(data);
             });
-            this.#socket.once('disconnect', () => {
-                rej(new Error('Ошибка подключения'));
+            this.#socket.once('disconnect', (e) => {
+                rej(e);
             });
         });
     }
+    /**
+     * close socket
+     */
     close() {
         this.#socket.removeAllListeners();
         this.#socket.close();
