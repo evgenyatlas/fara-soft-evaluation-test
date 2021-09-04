@@ -72,6 +72,7 @@ export default class Connector {
         this.#socket.off(event, fn);
     }
     /**
+     * emit
      * @param {string} event 
      * @param {Any} fn 
      */

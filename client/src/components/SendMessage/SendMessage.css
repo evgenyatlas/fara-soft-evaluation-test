@@ -1,7 +1,9 @@
 .SendMessage {
-    padding-right: calc(var(--default-size-controls) + 5px);
     position: relative;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .SendMessage__Input {
@@ -9,7 +11,6 @@
 }
 
 .SendMessage__Send {
-    position: absolute;
     right: 0px;
     top: 0px;
 }
