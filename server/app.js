@@ -1,9 +1,10 @@
-const Chat = require('./features/chat/chat')
-const User = require('./features/user/user')
-const { uid } = require('./lib/uid')
+const Chat = require('./modules/chat/chat');
+const User = require('./modules/user/user');
+const { uid } = require('./lib/uid');
 
 class App {
     #io
+    //Chat dictionary
     #chats = new Map()
     /**
      * @param {Socket} io 
@@ -31,10 +32,9 @@ class App {
         if (!this.#chats.has(chatId))
             this.#chats.set(chatId, new Chat(chatId));
 
+        //get the chat and add the user there
         const chat = this.#chats.get(chatId);
-
         const user = new User(userName, socket);
-
         chat.join(user);
     }
 }

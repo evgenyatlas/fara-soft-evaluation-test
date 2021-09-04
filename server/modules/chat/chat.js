@@ -3,7 +3,7 @@ const Message = require("../message/message");
 
 class Chat {
     id
-    //user dictionary
+    //users dictionary
     #users = {}
     //list of messages
     #messages = []
@@ -30,11 +30,11 @@ class Chat {
         }
         //save user to dictionary
         this.#users[user.name] = user;
-        //sending initial data to the user
+        //send initial data to the user
         user.emit('join', { messages: this.#messages, users: this.#users, chatId: this.id });
         //notify other users about a new user
         this.#broadcast(user, 'userJoin', user);
-        //subscribing to user events
+        //subscribe to user events
         this.#subsUserEvents(user);
     }
     /**
@@ -51,6 +51,7 @@ class Chat {
      * @param {User} user 
      */
     #leave(user) {
+        //clearing subscriptions (socket.io)
         delete this.#users[user.name];
         user.remove();
         //notify other users about a new user
@@ -63,7 +64,7 @@ class Chat {
      */
     #message(user, { text }) {
         const message = new Message(user, text);
-        this.#messages.push(message);
+        this.#messages.unshift(message);
         this.#emitAll('userMessage', message);
     }
     /********/

@@ -1,7 +1,7 @@
 import ValueStore from "../../lib/effector/valueStore";
 
 /**
- * Storage and Users management
+ * User storage and management
  */
 class Users extends ValueStore {
     constructor(value) {
