@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { timePassed } from "../../../lib/timePassed";
-import { useTimeout } from '../../../lib/useTimeout';
+import { useInterval } from '../../../lib/useInterval';
+
 
 /**
  * TimeUpdate component - time display (with update render)
@@ -11,8 +12,10 @@ import { useTimeout } from '../../../lib/useTimeout';
 export function TimeUpdate({ time, timeout = 1000 }) {
     const [timeText, setTimeText] = useState(timePassed(time));
 
-    useTimeout(() => {
+    useInterval(() => {
         const newTimeText = timePassed(time);
+        console.log(newTimeText, timeText)
+
         if (timeText !== newTimeText) {
             setTimeText(newTimeText);
         }
