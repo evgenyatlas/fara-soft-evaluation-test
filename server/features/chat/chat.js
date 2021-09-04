@@ -37,12 +37,14 @@ class Chat {
         //subscribing to user events
         this.#subsUserEvents(user)
     }
+    /**
+     * @param {User} user 
+     */
     #subsUserEvents(user) {
         //i use bind not only for context binding, but also for currying
         user.on('disconnect', this.#leave.bind(this, user));
         user.on('userMessage', this.#message.bind(this, user));
     }
-
     /*** User action handlers ***/
     /**
      * User leave
@@ -65,7 +67,6 @@ class Chat {
         this.#emitAll('userMessage', message)
     }
     /********/
-
     //I dont know about native broadcast and rooms :)
     /**
      * emit for all users
@@ -87,6 +88,13 @@ class Chat {
             this.#users,
             (userName, user) => filter(user) && user.emit(event, data)
         )
+    }
+    /**
+     * check if the chat id is correct
+     * @param {string} chatId 
+     */
+    static isId(chatId) {
+        return /^.{7}$/.test(chatId)
     }
 }
 

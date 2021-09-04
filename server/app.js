@@ -12,8 +12,9 @@ class App {
         this.#io = io
     }
     init() {
+        /*** Socket event handlers ***/
         this.#io.on('connection', async (socket) => {
-            /*** Socket event handlers ***/
+            console.log('connect')
             //I am using bind to bind context and currying
             socket.on('join', this.#joinChat.bind(this, socket));
         })
@@ -25,9 +26,9 @@ class App {
      * @param {(string || null)} data.chatId 
      */
     #joinChat(socket, { userName, chatId }) {
-        //If ChatId is not passed, then we generate
-        chatId = chatId || uid()
-        //If the chat does not exist, then create new 
+        //If ChatId is not passed or not correct, then we generate
+        chatId = chatId && Chat.isId(chatId) ? chatId : uid()
+        //If the chat does not exist, then create a new one and write it to the dictionary
         if (!this.#chats.has(chatId))
             this.#chats.set(chatId, new Chat(chatId))
 

@@ -8,6 +8,7 @@ export default class ValueStore {
     $store
     constructor(value) {
         this.$store = createStore(value);
+        //event for
         this.set = createEvent();
         this.$store.on(this.set, setPayload);
     }

@@ -3,24 +3,29 @@ import { ChatInfo } from './components/ChatInfo';
 import { ToastContainer } from 'react-toastify';
 import { Chat } from './components/Chat';
 import { Login } from './components/Login';
-import Connect from './lib/io/connect';
+import Connector from './lib/connector';
 import chat from './modules/chat/chat';
 import config from './config';
+import { showError } from './lib/showError';
 
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default class App {
-    #connect
-    async init() {
-        //Connect to the server
-        this.#connect = new Connect(config('SERVER_URL'));
-        await this.#connect.init();
-        chat.init(this.#connect);
-        this.#connect.on('error', this.handleErrors);
-    }
-    handleErrors(error) {
-        console.error(error);
+    init() {
+        const connector = new Connector(config('SERVER_URL'));
+        //init chat
+        chat.init(connector)
+        //Connect to server and start chat
+        connector.connect(
+            //callback on success
+            chat.start,
+            //callback on error
+            () => {
+                showError(new Error('Ошибка подключения'), 1000)
+                chat.stop()
+            }
+        );
     }
     Component() {
         return (

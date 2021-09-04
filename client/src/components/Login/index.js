@@ -13,7 +13,7 @@ export function Login() {
     return (
         !joined &&
         <div className="Login">
-            <h1 className="Login__Title">Введите свое имя, что бы войти</h1>
+            <h1 className="Login__Title">Введите свой никнейм, что бы войти</h1>
             <LoginForm />
         </div>
     );

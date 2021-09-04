@@ -13,11 +13,14 @@ export function LoginForm() {
         register,
         handleSubmit,
     } = useForm();
-    const onSubmit = ({ loginName }) => chat.login(loginName);
+    const onSubmit = ({ userName }) => {
+        chat.userName.set(userName);
+        chat.login();
+    };
 
     return (
         <form className="flex-align-center" onSubmit={handleSubmit(onSubmit)}>
-            <Input {...register('loginName')} placeholder="Пример: Василий" required />
+            <Input {...register('userName')} placeholder="Пример: Evgeny" required />
             <SendBtn className="m5-left" />
         </form>
     );

@@ -6,20 +6,20 @@ import { useRef, useEffect } from "react";
  * @param {number} delay 
  */
 export function useInterval(callback, delay) {
-    const savedCallback = useRef(callback)
+    const savedCallback = useRef(callback);
 
     useEffect(() => {
-        savedCallback.current = callback
-    }, [callback])
+        savedCallback.current = callback;
+    }, [callback]);
 
     useEffect(() => {
         // Don't schedule if no delay is specified.
         if (delay === null) {
-            return
+            return;
         }
 
-        const id = setInterval(() => savedCallback.current(), delay)
+        const id = setInterval(() => savedCallback.current(), delay);
 
-        return () => clearInterval(id)
-    }, [delay])
+        return () => clearInterval(id);
+    }, [delay]);
 }

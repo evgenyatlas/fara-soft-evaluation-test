@@ -14,8 +14,6 @@ export function TimeUpdate({ time, timeout = 1000 }) {
 
     useInterval(() => {
         const newTimeText = timePassed(time);
-        console.log(newTimeText, timeText)
-
         if (timeText !== newTimeText) {
             setTimeText(newTimeText);
         }
