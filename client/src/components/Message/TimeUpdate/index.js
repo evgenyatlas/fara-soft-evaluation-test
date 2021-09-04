@@ -9,7 +9,7 @@ import { useInterval } from '../../../lib/useInterval';
  * @param {Function} time
  * @param {number} timeout
  */
-export function TimeUpdate({ time, timeout = 1000 }) {
+export function TimeUpdate({ time, timeout = 1000 * 60 }) {
     const [timeText, setTimeText] = useState(timePassed(time));
 
     useInterval(() => {

@@ -6,8 +6,8 @@ const UserSchema = Schema({
         unique: true,
         required: true,
     }
-})
+});
 
-const User = model(UserSchema, 'user')
+const User = model(UserSchema, 'user');
 
-module.exports.User = User
+module.exports.User = User;

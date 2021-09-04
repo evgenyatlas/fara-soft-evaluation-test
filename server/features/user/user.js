@@ -16,8 +16,8 @@ class User {
         this.#socket.emit(event, data);
     }
     remove() {
-        this.#socket.removeAllListeners()
+        this.#socket.removeAllListeners();
     }
 }
 
-module.exports = User
+module.exports = User;

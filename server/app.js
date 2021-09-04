@@ -9,12 +9,11 @@ class App {
      * @param {Socket} io 
      */
     constructor(io) {
-        this.#io = io
+        this.#io = io;
     }
     init() {
         /*** Socket event handlers ***/
         this.#io.on('connection', async (socket) => {
-            console.log('connect')
             //I am using bind to bind context and currying
             socket.on('join', this.#joinChat.bind(this, socket));
         })
@@ -27,17 +26,17 @@ class App {
      */
     #joinChat(socket, { userName, chatId }) {
         //If ChatId is not passed or not correct, then we generate
-        chatId = chatId && Chat.isId(chatId) ? chatId : uid()
+        chatId = chatId && Chat.isId(chatId) ? chatId : uid();
         //If the chat does not exist, then create a new one and write it to the dictionary
         if (!this.#chats.has(chatId))
-            this.#chats.set(chatId, new Chat(chatId))
+            this.#chats.set(chatId, new Chat(chatId));
 
-        const chat = this.#chats.get(chatId)
+        const chat = this.#chats.get(chatId);
 
-        const user = new User(userName, socket)
+        const user = new User(userName, socket);
 
-        chat.join(user)
+        chat.join(user);
     }
 }
 
-module.exports = App
+module.exports = App;

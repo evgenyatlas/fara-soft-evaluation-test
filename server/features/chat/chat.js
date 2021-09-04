@@ -35,7 +35,7 @@ class Chat {
         //notify other users about a new user
         this.#broadcast(user, 'userJoin', user);
         //subscribing to user events
-        this.#subsUserEvents(user)
+        this.#subsUserEvents(user);
     }
     /**
      * @param {User} user 
@@ -62,9 +62,9 @@ class Chat {
      * @param {string} message 
      */
     #message(user, { text }) {
-        const message = new Message(user, text)
-        this.#messages.push(message)
-        this.#emitAll('userMessage', message)
+        const message = new Message(user, text);
+        this.#messages.push(message);
+        this.#emitAll('userMessage', message);
     }
     /********/
     //I dont know about native broadcast and rooms :)
@@ -75,7 +75,7 @@ class Chat {
      * @param {any} options.data
      */
     #broadcast(except, event, data) {
-        this.#emitAll(event, data, (user) => user !== except)
+        this.#emitAll(event, data, (user) => user !== except);
     }
     /**
      * Emit for all users
@@ -87,15 +87,15 @@ class Chat {
         forEachObj(
             this.#users,
             (userName, user) => filter(user) && user.emit(event, data)
-        )
+        );
     }
     /**
      * check if the chat id is correct
      * @param {string} chatId 
      */
     static isId(chatId) {
-        return /^.{7}$/.test(chatId)
+        return /^.{7}$/.test(chatId);
     }
 }
 
-module.exports = Chat
+module.exports = Chat;

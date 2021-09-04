@@ -15,15 +15,15 @@ export default class App {
     init() {
         const connector = new Connector(config('SERVER_URL'));
         //init chat
-        chat.init(connector)
+        chat.init(connector);
         //Connect to server and start chat
         connector.connect(
             //callback on success
             chat.start,
             //callback on error
             () => {
-                showError(new Error('Ошибка подключения'), 1000)
-                chat.stop()
+                showError(new Error('Повторное подключение к серверу'), 1000);
+                chat.stop();
             }
         );
     }

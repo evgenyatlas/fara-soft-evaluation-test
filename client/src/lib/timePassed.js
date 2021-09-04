@@ -9,7 +9,7 @@ export function timePassed(time) {
 
     const now = Date.now();
     const diff = now - time;
-    if (diff < 1000 * 60 * 1.5) {
+    if (diff < 1000 * 60 * 1) {
         return 'только что';
     } else if (diff > 1000 * 5 && diff < 1000 * 60 * 60) {
         const t = Math.round(diff / 1000 / 60);

@@ -31,13 +31,13 @@ class Chat {
         this.#subsEvents();
         //If the userName is entered, then we login
         if (this.userName.get())
-            this.login()
+            this.login();
     }
     /**
      * Stop chat method
      */
     stop = () => {
-        this.#unSubsEvents()
+        this.#unSubsEvents();
     }
     /**
      * chat login method
