@@ -28,7 +28,7 @@ export function ChatInfo() {
                 <div className="ChatInfo__ListUsers">
                     {
                         users.map((user) =>
-                            <User key={user} {...user}></User>
+                            <User key={user.name} {...user}></User>
                         )
                     }
                 </div>

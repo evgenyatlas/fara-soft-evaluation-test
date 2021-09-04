@@ -15,13 +15,13 @@ class Chat {
     messages = new Messages([])
     users = new Users({})
     userName = new ValueStore('')
-    #connect
+    #connector
     /**
      * chat init method
      * @param {Connector} connect 
      */
-    init(connect) {
-        this.#connect = connect;
+    init(connector) {
+        this.#connector = connector;
     }
     /**
      * Chat start method
@@ -45,7 +45,7 @@ class Chat {
     async login() {
         try {
             //Connect to the chat and get the initial data
-            const { messages, users, chatId } = await this.#connect.req('join', { userName: this.userName.get(), chatId: this.id.get() });
+            const { messages, users, chatId } = await this.#connector.req('join', { userName: this.userName.get(), chatId: this.id.get() });
             //If the chat is new, then go there
             if (chatId !== this.id) {
                 this.id.set(chatId);
@@ -66,20 +66,20 @@ class Chat {
      * @param {string} text
      */
     async sendMessage(text) {
-        this.#connect.emit('userMessage', { text });
+        this.#connector.emit('userMessage', { text });
     }
     /**
      * Subscribing to user events (from server)
      */
     #subsEvents = () => {
-        this.#connect.on('userJoin', this.#userJoin);
-        this.#connect.on('userLeave', this.#userLeave);
-        this.#connect.on('userMessage', this.#message);
+        this.#connector.on('userJoin', this.#userJoin);
+        this.#connector.on('userLeave', this.#userLeave);
+        this.#connector.on('userMessage', this.#message);
     }
     #unSubsEvents = () => {
-        this.#connect.off('userJoin', this.#userJoin);
-        this.#connect.off('userLeave', this.#userLeave);
-        this.#connect.off('userMessage', this.#message);
+        this.#connector.off('userJoin', this.#userJoin);
+        this.#connector.off('userLeave', this.#userLeave);
+        this.#connector.off('userMessage', this.#message);
     }
     /**
      * handle joined users
