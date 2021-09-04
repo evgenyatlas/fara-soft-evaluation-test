@@ -5,6 +5,6 @@ export default class Messages extends ValueStore {
         super(value);
     }
     add(message) {
-        this.set([message, ...this.get()])
+        this.set([message, ...this.get()]);
     }
 }

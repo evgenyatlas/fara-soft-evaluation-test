@@ -78,7 +78,7 @@ class Chat {
         this.users.remove(user);
     }
     #message = (message) => {
-        this.messages.add(message)
+        this.messages.add(message);
     }
 }
 

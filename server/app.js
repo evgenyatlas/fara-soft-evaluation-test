@@ -2,15 +2,18 @@ const Chat = require('./features/chat/chat')
 const User = require('./features/user/user')
 const { uid } = require('./lib/uid')
 
-
 class App {
     #io
     #chats = new Map()
+    /**
+     * @param {Socket} io 
+     */
     constructor(io) {
         this.#io = io
     }
     init() {
         this.#io.on('connection', async (socket) => {
+            /*** Socket event handlers ***/
             //I am using bind to bind context and currying
             socket.on('join', this.#joinChat.bind(this, socket));
         })

@@ -1,5 +1,5 @@
 import { useStore } from 'effector-react';
-import React, { useState } from 'react';
+import React from 'react';
 import chat from '../../modules/chat/chat';
 import { Message } from '../Message';
 
@@ -9,7 +9,7 @@ export function ListMessages() {
     const messages = useStore(chat.messages.$store);
     return (
         <div className="ListMessages">
-            {messages.map((message) => <Message key={message.user.name + message.time} {...message} />)}
+            {messages.map((message) => <Message key={message.id} {...message} />)}
         </div>
     );
 }

@@ -10,6 +10,7 @@ import './SendMessage.css';
 
 /**
  * SendMessage component
+ * @param {string} className
  */
 export function SendMessage({ className }) {
     const {
@@ -19,8 +20,8 @@ export function SendMessage({ className }) {
     } = useForm();
     const onSubmit = ({ message }) => {
         chat.sendMessage(message);
-        reset()
-    }
+        reset();
+    };
     return (
         <form className={cn("SendMessage", className)} onSubmit={handleSubmit(onSubmit)}>
             <Input {...register('message')} className="SendMessage__Input" placeholder="Сообщение" />

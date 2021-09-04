@@ -1,8 +1,21 @@
 import React from 'react';
 import { Btn } from "../Btn";
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 
-const copyCurrLink = () => window.navigator.clipboard.writeText(window.location.href);
+const copyCurrLink = () => {
+    const link = window.location.href;
+    window.navigator.clipboard.writeText(link);
+    toast.success(`Ссылка ${link} скопирована`, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+    });
+};
+
 /**
  * ShareBtn component
  * @param {Function} onClick 

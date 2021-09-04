@@ -2,7 +2,6 @@ const http = require('http')
 const socket = require('socket.io')
 const server = http.createServer()
 const config = require('config')
-const { take } = require('./lib/io/take')
 const App = require('./app')
 
 const io = socket(server, {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import { User } from '../User';
-import { timePassed } from '../../lib/timePassed';
+import { TimeUpdate } from './TimeUpdate';
 
 import './Message.css';
 
@@ -18,7 +18,9 @@ export function Message({ text, user, time, float = 'left' }) {
             <User className="Message__Avatar" {...user} />
             <div className="Message__Content">
                 {text}
-                <div className="Message__Time">{timePassed(time)}</div>
+                <div className="Message__Time">
+                    <TimeUpdate time={time} />
+                </div>
             </div>
         </div>
     );
@@ -27,7 +29,7 @@ export function Message({ text, user, time, float = 'left' }) {
 Message.propTypes = {
     text: PropTypes.string.isRequired,
     user: PropTypes.shape({
-        nickname: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
         color: PropTypes.string.isRequired
     }),
     time: PropTypes.number.isRequired,

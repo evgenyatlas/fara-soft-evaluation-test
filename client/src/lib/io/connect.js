@@ -1,5 +1,8 @@
 import { io } from "socket.io-client";
 
+/**
+ * Wrapper around socket.io 
+ */
 export default class Connect {
     #socket
     #serverUrl
@@ -22,6 +25,20 @@ export default class Connect {
         });
     }
     /**
+    * request -> response (request and wait for a response)
+    * @param {string} event 
+    * @param {any} data 
+    * @returns {Promise} Promise
+    */
+    async req(event, data) {
+        return new Promise((res, rej) => {
+            this.#socket.emit(event, data);
+            this.take(event)
+                .then(res)
+                .catch(rej);
+        });
+    }
+    /**
     * Promise over once
     * @param {object} socket 
     * @param {string} event 
@@ -36,20 +53,6 @@ export default class Connect {
             this.#socket.once('disconnect', () => {
                 rej(new Error({ code: 500, message: 'Ошибка подключения' }));
             });
-        });
-    }
-    /**
-     * request -> response (request and wait for a response)
-     * @param {string} event 
-     * @param {any} data 
-     * @returns {Promise} Promise
-     */
-    async req(event, data) {
-        return new Promise((res, rej) => {
-            this.#socket.emit(event, data);
-            this.take(event)
-                .then(res)
-                .catch(rej);
         });
     }
     close() {
