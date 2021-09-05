@@ -12,6 +12,7 @@ import { obj2list } from '../../lib/obj2list';
 /**
  * ChatInfo component (Displaying users in chat and chat ID)
  */
+//TODO: split into multiple components
 export function ChatInfo() {
     const id = useStore(chat.id.$store);
     //transform the dictionary into a list

@@ -13,13 +13,13 @@ import './Input.css';
 * @param {text} props.type 
 * @param {text} props.placeholder 
 */
+//I am using forwardRef to make the react-hooks-form library work correctly
 export const Input = forwardRef(function Input({ className, ...props }, ref) {
     return (
         <input className={cn("Input", className)} {...props} ref={ref} >
         </input>
     );
 });
-
 
 Input.propTypes = {
     defaultValue: PropTypes.string,

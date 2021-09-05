@@ -4,7 +4,7 @@ const Message = require("../message/message");
 class Chat {
     id
     //users dictionary
-    #users = {}
+    #users = new Map()
     //list of messages
     #messages = []
     /**
@@ -20,7 +20,7 @@ class Chat {
      */
     join(user) {
         //If the user is already in the chat, then we throw an error and exit
-        if (this.#users[user.name]) {
+        if (this.#users.has[user.name]) {
             return user.emit('join', {
                 error: {
                     code: 422,
@@ -29,11 +29,16 @@ class Chat {
             });
         }
         //save user to dictionary
-        this.#users[user.name] = user;
-        //send initial data to the user
-        user.emit('join', { messages: this.#messages, users: this.#users, chatId: this.id });
+        this.#users.set(user.name, user);
+        //send chat data to user
+        user.emit('join', {
+            chatId: this.id,
+            messages: this.#messages,
+            //Map -> Object
+            users: Object.fromEntries(this.#users)
+        });
         //notify other users about a new user
-        this.#broadcast(user, 'userJoin', user);
+        this.#broadcast({ except: user, event: 'userJoin', data: user });
         //subscribe to user events
         this.#subsUserEvents(user);
     }
@@ -51,11 +56,11 @@ class Chat {
      * @param {User} user 
      */
     #leave(user) {
+        this.#users.delete(user.name);
         //clearing subscriptions (socket.io)
-        delete this.#users[user.name];
         user.remove();
         //notify other users about a new user
-        this.#broadcast(user, 'userLeave', user);
+        this.#broadcast({ except: user, event: 'userLeave', data: user });
     }
     /**
      * User message
@@ -75,7 +80,7 @@ class Chat {
      * @param {string} options.event
      * @param {any} options.data
      */
-    #broadcast(except, event, data) {
+    #broadcast({ except, event, data }) {
         this.#emitAll(event, data, (user) => user !== except);
     }
     /**
@@ -85,10 +90,7 @@ class Chat {
      * @param {Function} filter 
      */
     #emitAll(event, data, filter = Boolean) {
-        forEachObj(
-            this.#users,
-            (userName, user) => filter(user) && user.emit(event, data)
-        );
+        this.#users.forEach((user) => filter(user) && user.emit(event, data));
     }
     /**
      * check if the chat id is correct

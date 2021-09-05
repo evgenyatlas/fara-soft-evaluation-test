@@ -21,7 +21,7 @@ export default class Connector {
         this.#socket.on('disconnect', onError);
     }
     /**
-    * request/emit -> response (request/emit and wait for a response)
+    * request(emit) -> response (request(emit) and wait for a response)
     * @param {string} event 
     * @param {any} data 
     * @returns {Promise} Promise

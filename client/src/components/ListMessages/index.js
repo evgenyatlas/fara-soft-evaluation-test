@@ -5,11 +5,19 @@ import { Message } from '../Message';
 
 import './ListMessages.css';
 
+/**
+ * ListMessages component 
+ * Displaying a list of messages from the store (Effector)
+ */
 export function ListMessages() {
     const messages = useStore(chat.messages.$store);
     return (
         <div className="ListMessages">
-            {messages.map((message) => <Message key={message.id} {...message} />)}
+            {
+                messages.map((message) =>
+                    <Message key={message.id} {...message} />
+                )
+            }
         </div>
     );
 }

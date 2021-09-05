@@ -7,7 +7,7 @@ class User {
     constructor(name, socket) {
         this.name = name;
         this.#socket = socket;
-        this.color = randomFlatColors();
+        this.color = randomFlatColors(["blue", "teal", "green", "purple", "dark", "yellow", "orange", "red"]);
     }
     on(event, fn) {
         this.#socket.on(event, fn);

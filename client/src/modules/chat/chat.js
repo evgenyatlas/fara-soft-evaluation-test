@@ -8,7 +8,8 @@ import { url2chatId } from "./lib/url2chatId";
 /**
  * Manager for the current chat 
  */
-//fields use the ValuStore(wrapper over effector) or inherit from it, for update react component
+//fields use the ValuStore(wrapper around effector) or inherit from it, for update react component
+//TODO: Split into multiple modules
 class Chat {
     id = new ValueStore(url2chatId(history.location.pathname))
     joined = new ValueStore(false)
@@ -40,7 +41,7 @@ class Chat {
         this.#unSubsEvents();
     }
     /**
-     * chat login method
+     * Chat login method
      */
     async login() {
         try {
@@ -95,6 +96,10 @@ class Chat {
     #userLeave = (user) => {
         this.users.remove(user);
     }
+    /**
+     * handle message users
+     * @param {Message} message 
+     */
     #message = (message) => {
         this.messages.add(message);
     }
