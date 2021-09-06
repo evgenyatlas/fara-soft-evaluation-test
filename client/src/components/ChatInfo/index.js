@@ -1,12 +1,11 @@
-import { useStore } from 'effector-react';
 import React from 'react';
-import chat from '../../modules/chat/chat';
 import { declOfNum } from '../../lib/declOfNum';
 import { User } from '../User';
 import { ShareLinkBtn } from '../ShareLinkBtn';
 
 import './ChatInfo.css';
-import { obj2list } from '../../lib/obj2list';
+import { useChatId } from '../../modules/chat/hooks/useChatId';
+import { useUsers } from '../../modules/chat/hooks/useUsers';
 
 
 /**
@@ -14,9 +13,8 @@ import { obj2list } from '../../lib/obj2list';
  */
 //TODO: split into multiple components
 export function ChatInfo() {
-    const id = useStore(chat.id.$store);
-    //transform the dictionary into a list
-    const users = obj2list(useStore(chat.users.$store));
+    const id = useChatId();
+    const users = useUsers();
     return (
         <div className="ChatInfo">
             <div className="container">

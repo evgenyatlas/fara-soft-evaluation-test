@@ -1,6 +1,5 @@
-import { useStore } from 'effector-react';
 import React from 'react';
-import chat from '../../modules/chat/chat';
+import { useMessages } from '../../modules/chat/hooks/useMessages';
 import { Message } from '../Message';
 
 import './ListMessages.css';
@@ -10,7 +9,7 @@ import './ListMessages.css';
  * Displaying a list of messages from the store (Effector)
  */
 export function ListMessages() {
-    const messages = useStore(chat.messages.$store);
+    const messages = useMessages();
     return (
         <div className="ListMessages">
             {

@@ -53,7 +53,7 @@ class Chat {
                 history.push(chatId);
             }
 
-            //setting initial data
+            //set initial data
             this.messages.set(messages);
             this.users.set(users);
 

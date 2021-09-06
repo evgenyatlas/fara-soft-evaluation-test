@@ -1,15 +1,14 @@
 import React from 'react';
 import { LoginForm } from './LoginForm';
-import { useStore } from 'effector-react';
+import { useJoined } from '../../modules/chat/hooks/useJoined';
 
 import './Login.css';
-import chat from '../../modules/chat/chat';
 
 /**
  * Login component
  */
 export function Login() {
-    const joined = useStore(chat.joined.$store);
+    const joined = useJoined();
     return (
         !joined &&
         <div className="Login">

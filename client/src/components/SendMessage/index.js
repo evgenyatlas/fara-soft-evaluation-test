@@ -24,7 +24,7 @@ export function SendMessage({ className }) {
     };
     return (
         <form className={cn("SendMessage", className)} onSubmit={handleSubmit(onSubmit)}>
-            <Input {...register('message')} className="SendMessage__Input" placeholder="Сообщение" />
+            <Input {...register('message')} className="SendMessage__Input" placeholder="Сообщение" required />
             <SendBtn className="m5-left SendMessage__Send" />
         </form>
     );
